@@ -27,7 +27,6 @@ module "office365-domains" {
     "selector2-sebastianjust-comNNc._domainkey.gaestehausgrefrath.onmicrosoft.com"
   ]
 }
-}
 ```
 
 The following variabels are *optional*:
@@ -39,9 +38,9 @@ The following variabels are *optional*:
 
 ## Examples
 
-Please check the examples in the [`examples/`](./examples/) folder:
-* [Basic](./examples/basic/main.tf) - Creates just the basic Office365 email records in the host zone
-* [Complete](./examples/complete/main.tf) - Creates all the Office365 records including SIP, MDM & domain verification.
+Please check the examples in the [`examples/`](https://github.com/cloudspout/terraform-aws-office365-domains/tree/master/examples) folder:
+* [Basic](https://github.com/cloudspout/terraform-aws-office365-domains/blob/master/examples/basic/main.tf) - Creates just the basic Office365 email records in the host zone
+* [Complete](https://github.com/cloudspout/terraform-aws-office365-domains/blob/master/examples/complete/main.tf) - Creates all the Office365 records including SIP, MDM & domain verification.
 
 -----------
 
