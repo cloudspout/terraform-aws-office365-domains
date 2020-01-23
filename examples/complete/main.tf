@@ -3,7 +3,7 @@ resource "aws_route53_zone" "example_com" {
 }
 
 module "office365_domains" {
-  source = "github.com/cloudspout/terraform-aws-office365-domains?ref=v0.0.1"
+  source = "github.com/cloudspout/terraform-aws-office365-domains"
 
   zone      = aws_route53_zone.example_com
   mx_record = "0 example-comNNc.mail.protection.outlook.com."

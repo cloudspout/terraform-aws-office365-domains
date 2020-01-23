@@ -40,8 +40,8 @@ variable "domain_ownership_verification_code" {
 }
 
 variable "ip" {
-  type    = string
-  
+  type = string
+
   default = "0.0.0.0"
 
   description = "IP address for the root A and `www` A record"
