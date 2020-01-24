@@ -18,7 +18,7 @@ resource "aws_route53_zone" "example_com" {
 
 module "office365-domains" {
   source  = "cloudspout/office365-domains/aws"
-  version = "0.0.2"
+  version = "0.0.6"
 
   zone      = aws_route53_zone.example_com
   mx_record = "0 example-comNNc.mail.protection.outlook.com."
