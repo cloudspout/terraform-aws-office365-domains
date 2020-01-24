@@ -32,7 +32,6 @@ module "office365-domains" {
 The following variabels are *optional*:
 
 * `domain_ownership_verification_code` - The domain ownership registration code in the format `MS=ms XXXXXXXX`. Can be skipped if the ownership is already confirmed in Office365
-* `ip` - IP address for the root A and `www` A record - if not provided, no root & `www` A record are created
 * `txt_record` - The TXT record for the root record - by default the Office365 SPF entry: `"v=spf1 a include:spf.protection.outlook.com -all"`
 * `enable_mdm` -  Add two CNAME records for Mobile Device Management (MDM) for Office 365 if set to `true`
 

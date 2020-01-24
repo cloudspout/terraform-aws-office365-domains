@@ -39,14 +39,6 @@ variable "domain_ownership_verification_code" {
   description = "The domain ownership registration code in the format `MS=ms XXXXXXXX`. Can be skipped if the ownership is already confirmed in Office365."
 }
 
-variable "ip" {
-  type = string
-
-  default = "0.0.0.0"
-
-  description = "IP address for the root A and `www` A record"
-}
-
 variable "enable_mdm" {
   type = bool
 

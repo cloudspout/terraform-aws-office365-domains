@@ -13,6 +13,5 @@ module "office365_domains" {
   ]
 
   domain_ownership_verification_code = "MS=ms 12345678"
-  ip                                 = "127.0.0.1"
   enable_mdm                         = true
 }
