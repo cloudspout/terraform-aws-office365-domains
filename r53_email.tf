@@ -23,7 +23,7 @@ resource "aws_route53_record" "txt" {
   type    = "TXT"
 
   ttl     = 3600
-  records = "${var.domain_ownership_verification_code != "MS=ms XXXXXXXX" ? concat(var.txt_record, [var.domain_ownership_verification_code]) : var.txt_record}"
+  records = var.domain_ownership_verification_code != "MS=ms XXXXXXXX" ? concat(var.txt_record, [var.domain_ownership_verification_code]) : var.txt_record
 }
 
 resource "aws_route53_record" "dkim1" {
