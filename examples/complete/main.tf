@@ -8,8 +8,8 @@ module "office365_domains" {
   zone      = aws_route53_zone.example_com
   mx_record = "0 example-comNNc.mail.protection.outlook.com."
   domainkeys = [
-    "selector1-sebastianjust-comNNc._domainkey.gaestehausgrefrath.onmicrosoft.com",
-    "selector2-sebastianjust-comNNc._domainkey.gaestehausgrefrath.onmicrosoft.com"
+     "selector1-domain-comNNc._domainkey.account.onmicrosoft.com",
+    "selector2-domain-comMMc._domainkey.account.onmicrosoft.com"
   ]
 
   domain_ownership_verification_code = "MS=ms 12345678"
