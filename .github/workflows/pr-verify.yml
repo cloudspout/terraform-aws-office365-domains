@@ -1,0 +1,64 @@
+name: PR Verify
+
+on:
+  pull_request:
+    branches: [master, main]
+
+env:
+  TOFU_VERSION: "1.10.10"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-verify-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dir:
+          - "."
+          - "examples/basic"
+          - "examples/complete"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          tofu_version: "${{ env.TOFU_VERSION }}"
+          tofu_wrapper: false
+
+      - name: Tofu fmt
+        working-directory: ${{ matrix.dir }}
+        run: tofu fmt -check -diff
+
+      - name: Tofu init
+        working-directory: ${{ matrix.dir }}
+        run: tofu init -backend=false -input=false
+
+      - name: Tofu validate
+        working-directory: ${{ matrix.dir }}
+        run: tofu validate -no-color
+
+  tflint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: latest
+
+      - name: Init TFLint
+        run: tflint --init
+
+      - name: Run TFLint
+        run: tflint --recursive --minimum-failure-severity=error

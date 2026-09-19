@@ -1,17 +1,37 @@
+terraform {
+  required_version = "~> 1.10"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.65"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
 resource "aws_route53_zone" "example_com" {
   name = "example.com"
 }
 
 module "office365_domains" {
-  source = "github.com/cloudspout/terraform-aws-office365-domains"
+  source = "../.."
 
-  zone      = aws_route53_zone.example_com
-  mx_record = "0 example-comNNc.mail.protection.outlook.com."
+  zone_id     = aws_route53_zone.example_com.zone_id
+  domain_name = aws_route53_zone.example_com.name
+
+  mx_record = "0 example-com.mail.protection.outlook.com"
   domainkeys = [
-     "selector1-domain-comNNc._domainkey.account.onmicrosoft.com",
-    "selector2-domain-comMMc._domainkey.account.onmicrosoft.com"
+    "selector1-domain-com._domainkey.account.onmicrosoft.com",
+    "selector2-domain-com._domainkey.account.onmicrosoft.com",
   ]
 
-  domain_ownership_verification_code = "MS=ms 12345678"
-  enable_mdm                         = true
+  domain_ownership_verification_code = "MS=ms12345678"
+  dmarc_record                       = "v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com"
+
+  enable_mdm                = true
+  enable_skype_for_business = true
 }
