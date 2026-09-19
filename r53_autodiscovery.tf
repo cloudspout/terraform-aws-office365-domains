@@ -1,16 +1,9 @@
+# Outlook / Exchange Online autodiscover.
 resource "aws_route53_record" "autodiscover" {
-  zone_id = var.zone.id
-  name    = "autodiscover.${var.zone.name}"
+  zone_id = var.zone_id
+  name    = "autodiscover.${var.domain_name}"
   type    = "CNAME"
 
-  ttl     = 3600
+  ttl     = var.ttl
   records = ["autodiscover.outlook.com"]
-}
-resource "aws_route53_record" "lyncdiscover" {
-  zone_id = var.zone.id
-  name    = "lyncdiscover.${var.zone.name}"
-  type    = "CNAME"
-
-  ttl     = 3600
-  records = ["webdir.online.lync.com"]
 }
